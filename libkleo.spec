@@ -6,11 +6,11 @@
 #
 Name     : libkleo
 Version  : 18.12.3
-Release  : 4
+Release  : 5
 URL      : https://download.kde.org/stable/applications/18.12.3/src/libkleo-18.12.3.tar.xz
 Source0  : https://download.kde.org/stable/applications/18.12.3/src/libkleo-18.12.3.tar.xz
 Source99 : https://download.kde.org/stable/applications/18.12.3/src/libkleo-18.12.3.tar.xz.sig
-Summary  : No detailed summary available
+Summary  : KDE PIM cryptographic library
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
 Requires: libkleo-data = %{version}-%{release}
@@ -44,6 +44,7 @@ Group: Development
 Requires: libkleo-lib = %{version}-%{release}
 Requires: libkleo-data = %{version}-%{release}
 Provides: libkleo-devel = %{version}-%{release}
+Requires: libkleo = %{version}-%{release}
 
 %description dev
 dev components for the libkleo package.
@@ -83,16 +84,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552011270
+export SOURCE_DATE_EPOCH=1555352283
 mkdir -p clr-build
 pushd clr-build
-export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1552011270
+export SOURCE_DATE_EPOCH=1555352283
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
 cp COPYING %{buildroot}/usr/share/package-licenses/libkleo/COPYING
