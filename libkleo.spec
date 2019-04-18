@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : libkleo
-Version  : 18.12.3
-Release  : 5
-URL      : https://download.kde.org/stable/applications/18.12.3/src/libkleo-18.12.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.12.3/src/libkleo-18.12.3.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.12.3/src/libkleo-18.12.3.tar.xz.sig
+Version  : 19.04.0
+Release  : 6
+URL      : https://download.kde.org/stable/applications/19.04.0/src/libkleo-19.04.0.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.04.0/src/libkleo-19.04.0.tar.xz
+Source99 : https://download.kde.org/stable/applications/19.04.0/src/libkleo-19.04.0.tar.xz.sig
 Summary  : KDE PIM cryptographic library
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -23,8 +23,6 @@ BuildRequires : buildreq-kde
 BuildRequires : gpgme-dev
 BuildRequires : gpgme-extras
 BuildRequires : kpimtextedit-dev
-BuildRequires : libassuan-dev
-BuildRequires : libgpg-error-dev
 BuildRequires : qtbase-dev mesa-dev
 
 %description
@@ -77,14 +75,14 @@ locales components for the libkleo package.
 
 
 %prep
-%setup -q -n libkleo-18.12.3
+%setup -q -n libkleo-19.04.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1555352283
+export SOURCE_DATE_EPOCH=1555624558
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -92,7 +90,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1555352283
+export SOURCE_DATE_EPOCH=1555624558
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
 cp COPYING %{buildroot}/usr/share/package-licenses/libkleo/COPYING
@@ -209,7 +207,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5Libkleo.so.5
-/usr/lib64/libKF5Libkleo.so.5.10.3
+/usr/lib64/libKF5Libkleo.so.5.11.0
 
 %files license
 %defattr(0644,root,root,0755)
