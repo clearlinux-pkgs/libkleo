@@ -6,7 +6,7 @@
 #
 Name     : libkleo
 Version  : 19.04.0
-Release  : 6
+Release  : 7
 URL      : https://download.kde.org/stable/applications/19.04.0/src/libkleo-19.04.0.tar.xz
 Source0  : https://download.kde.org/stable/applications/19.04.0/src/libkleo-19.04.0.tar.xz
 Source99 : https://download.kde.org/stable/applications/19.04.0/src/libkleo-19.04.0.tar.xz.sig
@@ -23,6 +23,8 @@ BuildRequires : buildreq-kde
 BuildRequires : gpgme-dev
 BuildRequires : gpgme-extras
 BuildRequires : kpimtextedit-dev
+BuildRequires : libassuan-dev
+BuildRequires : libgpg-error-dev
 BuildRequires : qtbase-dev mesa-dev
 
 %description
@@ -82,15 +84,22 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1555624558
+export SOURCE_DATE_EPOCH=1557040190
 mkdir -p clr-build
 pushd clr-build
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1555624558
+export SOURCE_DATE_EPOCH=1557040190
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
 cp COPYING %{buildroot}/usr/share/package-licenses/libkleo/COPYING
