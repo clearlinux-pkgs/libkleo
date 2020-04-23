@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : libkleo
-Version  : 19.12.3
-Release  : 20
-URL      : https://download.kde.org/stable/release-service/19.12.3/src/libkleo-19.12.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/19.12.3/src/libkleo-19.12.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/19.12.3/src/libkleo-19.12.3.tar.xz.sig
+Version  : 20.04.0
+Release  : 21
+URL      : https://download.kde.org/stable/release-service/20.04.0/src/libkleo-20.04.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.04.0/src/libkleo-20.04.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.04.0/src/libkleo-20.04.0.tar.xz.sig
 Summary  : KDE PIM cryptographic library
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -76,15 +76,15 @@ locales components for the libkleo package.
 
 
 %prep
-%setup -q -n libkleo-19.12.3
-cd %{_builddir}/libkleo-19.12.3
+%setup -q -n libkleo-20.04.0
+cd %{_builddir}/libkleo-20.04.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583516726
+export SOURCE_DATE_EPOCH=1587680850
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -101,11 +101,11 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1583516726
+export SOURCE_DATE_EPOCH=1587680850
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
-cp %{_builddir}/libkleo-19.12.3/COPYING %{buildroot}/usr/share/package-licenses/libkleo/7c203dee3a03037da436df03c4b25b659c073976
-cp %{_builddir}/libkleo-19.12.3/COPYING.LIB %{buildroot}/usr/share/package-licenses/libkleo/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/libkleo-20.04.0/COPYING %{buildroot}/usr/share/package-licenses/libkleo/7c203dee3a03037da436df03c4b25b659c073976
+cp %{_builddir}/libkleo-20.04.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/libkleo/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -148,6 +148,7 @@ popd
 /usr/include/KF5/Libkleo/FileNameRequester
 /usr/include/KF5/Libkleo/FileSystemWatcher
 /usr/include/KF5/Libkleo/Formatting
+/usr/include/KF5/Libkleo/GnuPG
 /usr/include/KF5/Libkleo/KConfigBasedKeyFilter
 /usr/include/KF5/Libkleo/KDHorizontalLine
 /usr/include/KF5/Libkleo/KeyApprovalDialog
@@ -184,6 +185,7 @@ popd
 /usr/include/KF5/libkleo/filenamerequester.h
 /usr/include/KF5/libkleo/filesystemwatcher.h
 /usr/include/KF5/libkleo/formatting.h
+/usr/include/KF5/libkleo/gnupg.h
 /usr/include/KF5/libkleo/kconfigbasedkeyfilter.h
 /usr/include/KF5/libkleo/kdhorizontalline.h
 /usr/include/KF5/libkleo/keyapprovaldialog.h
@@ -218,7 +220,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5Libkleo.so.5
-/usr/lib64/libKF5Libkleo.so.5.13.3
+/usr/lib64/libKF5Libkleo.so.5.14.0
 
 %files license
 %defattr(0644,root,root,0755)
