@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : libkleo
-Version  : 20.04.1
-Release  : 22
-URL      : https://download.kde.org/stable/release-service/20.04.1/src/libkleo-20.04.1.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.1/src/libkleo-20.04.1.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.1/src/libkleo-20.04.1.tar.xz.sig
+Version  : 20.04.2
+Release  : 23
+URL      : https://download.kde.org/stable/release-service/20.04.2/src/libkleo-20.04.2.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.04.2/src/libkleo-20.04.2.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.04.2/src/libkleo-20.04.2.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.1
@@ -83,15 +83,15 @@ locales components for the libkleo package.
 
 
 %prep
-%setup -q -n libkleo-20.04.1
-cd %{_builddir}/libkleo-20.04.1
+%setup -q -n libkleo-20.04.2
+cd %{_builddir}/libkleo-20.04.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1589834554
+export SOURCE_DATE_EPOCH=1591890590
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -107,11 +107,11 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1589834554
+export SOURCE_DATE_EPOCH=1591890590
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
-cp %{_builddir}/libkleo-20.04.1/COPYING %{buildroot}/usr/share/package-licenses/libkleo/7c203dee3a03037da436df03c4b25b659c073976
-cp %{_builddir}/libkleo-20.04.1/COPYING.LIB %{buildroot}/usr/share/package-licenses/libkleo/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/libkleo-20.04.2/COPYING %{buildroot}/usr/share/package-licenses/libkleo/7c203dee3a03037da436df03c4b25b659c073976
+cp %{_builddir}/libkleo-20.04.2/COPYING.LIB %{buildroot}/usr/share/package-licenses/libkleo/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -226,7 +226,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5Libkleo.so.5
-/usr/lib64/libKF5Libkleo.so.5.14.1
+/usr/lib64/libKF5Libkleo.so.5.14.2
 
 %files license
 %defattr(0644,root,root,0755)
