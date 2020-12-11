@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : libkleo
-Version  : 20.08.3
-Release  : 27
-URL      : https://download.kde.org/stable/release-service/20.08.3/src/libkleo-20.08.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.08.3/src/libkleo-20.08.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.08.3/src/libkleo-20.08.3.tar.xz.sig
+Version  : 20.12.0
+Release  : 28
+URL      : https://download.kde.org/stable/release-service/20.12.0/src/libkleo-20.12.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.12.0/src/libkleo-20.12.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.12.0/src/libkleo-20.12.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : GPL-2.0 LGPL-2.1
+License  : GPL-2.0 LGPL-2.0
 Requires: libkleo-data = %{version}-%{release}
 Requires: libkleo-lib = %{version}-%{release}
 Requires: libkleo-license = %{version}-%{release}
@@ -84,15 +84,15 @@ locales components for the libkleo package.
 
 
 %prep
-%setup -q -n libkleo-20.08.3
-cd %{_builddir}/libkleo-20.08.3
+%setup -q -n libkleo-20.12.0
+cd %{_builddir}/libkleo-20.12.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604615037
+export SOURCE_DATE_EPOCH=1607727732
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -108,11 +108,12 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1604615037
+export SOURCE_DATE_EPOCH=1607727732
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
-cp %{_builddir}/libkleo-20.08.3/COPYING %{buildroot}/usr/share/package-licenses/libkleo/7c203dee3a03037da436df03c4b25b659c073976
-cp %{_builddir}/libkleo-20.08.3/COPYING.LIB %{buildroot}/usr/share/package-licenses/libkleo/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/libkleo-20.12.0/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33
+cp %{_builddir}/libkleo-20.12.0/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/libkleo-20.12.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a
 pushd clr-build
 %make_install
 popd
@@ -151,7 +152,6 @@ popd
 /usr/include/KF5/Libkleo/DirectoryServicesWidget
 /usr/include/KF5/Libkleo/Dn
 /usr/include/KF5/Libkleo/Enum
-/usr/include/KF5/Libkleo/Exception
 /usr/include/KF5/Libkleo/FileNameRequester
 /usr/include/KF5/Libkleo/FileSystemWatcher
 /usr/include/KF5/Libkleo/Formatting
@@ -170,6 +170,7 @@ popd
 /usr/include/KF5/Libkleo/KeyResolver
 /usr/include/KF5/Libkleo/KeySelectionCombo
 /usr/include/KF5/Libkleo/KeySelectionDialog
+/usr/include/KF5/Libkleo/KleoException
 /usr/include/KF5/Libkleo/MessageBox
 /usr/include/KF5/Libkleo/NewKeyApprovalDialog
 /usr/include/KF5/Libkleo/OidMap
@@ -188,7 +189,6 @@ popd
 /usr/include/KF5/libkleo/dn.h
 /usr/include/KF5/libkleo/dnattributeorderconfigwidget.h
 /usr/include/KF5/libkleo/enum.h
-/usr/include/KF5/libkleo/exception.h
 /usr/include/KF5/libkleo/filenamerequester.h
 /usr/include/KF5/libkleo/filesystemwatcher.h
 /usr/include/KF5/libkleo/formatting.h
@@ -208,6 +208,7 @@ popd
 /usr/include/KF5/libkleo/keyselectioncombo.h
 /usr/include/KF5/libkleo/keyselectiondialog.h
 /usr/include/KF5/libkleo/kleo_export.h
+/usr/include/KF5/libkleo/kleoexception.h
 /usr/include/KF5/libkleo/messagebox.h
 /usr/include/KF5/libkleo/newkeyapprovaldialog.h
 /usr/include/KF5/libkleo/oidmap.h
@@ -227,12 +228,13 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5Libkleo.so.5
-/usr/lib64/libKF5Libkleo.so.5.15.3
+/usr/lib64/libKF5Libkleo.so.5.16.0
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libkleo/7c203dee3a03037da436df03c4b25b659c073976
-/usr/share/package-licenses/libkleo/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+/usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a
+/usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33
+/usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
 %files locales -f libkleopatra.lang
 %defattr(-,root,root,-)
