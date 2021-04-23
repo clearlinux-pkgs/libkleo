@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : libkleo
-Version  : 20.12.3
-Release  : 30
-URL      : https://download.kde.org/stable/release-service/20.12.3/src/libkleo-20.12.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.12.3/src/libkleo-20.12.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.12.3/src/libkleo-20.12.3.tar.xz.sig
+Version  : 21.04.0
+Release  : 31
+URL      : https://download.kde.org/stable/release-service/21.04.0/src/libkleo-21.04.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/21.04.0/src/libkleo-21.04.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/21.04.0/src/libkleo-21.04.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : GPL-2.0 LGPL-2.0
+License  : CC0-1.0 GPL-2.0 LGPL-2.0
 Requires: libkleo-data = %{version}-%{release}
 Requires: libkleo-lib = %{version}-%{release}
 Requires: libkleo-license = %{version}-%{release}
@@ -32,6 +32,7 @@ BuildRequires : ki18n-dev
 BuildRequires : kitemmodels-dev
 BuildRequires : kpimtextedit-dev
 BuildRequires : kwidgetsaddons-dev
+BuildRequires : qtbase-dev
 BuildRequires : qtbase-dev mesa-dev
 
 %description
@@ -84,15 +85,15 @@ locales components for the libkleo package.
 
 
 %prep
-%setup -q -n libkleo-20.12.3
-cd %{_builddir}/libkleo-20.12.3
+%setup -q -n libkleo-21.04.0
+cd %{_builddir}/libkleo-21.04.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1618632314
+export SOURCE_DATE_EPOCH=1619155909
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -108,12 +109,13 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1618632314
+export SOURCE_DATE_EPOCH=1619155909
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
-cp %{_builddir}/libkleo-20.12.3/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33
-cp %{_builddir}/libkleo-20.12.3/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/libkleo-20.12.3/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/libkleo-21.04.0/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/libkleo/8287b608d3fa40ef401339fd907ca1260c964123
+cp %{_builddir}/libkleo-21.04.0/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33
+cp %{_builddir}/libkleo-21.04.0/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/libkleo-21.04.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a
 pushd clr-build
 %make_install
 popd
@@ -144,9 +146,11 @@ popd
 %defattr(-,root,root,-)
 /usr/include/KF5/Libkleo/ChecksumDefinition
 /usr/include/KF5/Libkleo/Classify
+/usr/include/KF5/Libkleo/Compat
 /usr/include/KF5/Libkleo/CryptoConfigDialog
 /usr/include/KF5/Libkleo/CryptoConfigModule
 /usr/include/KF5/Libkleo/DNAttributeOrderConfigWidget
+/usr/include/KF5/Libkleo/Debug
 /usr/include/KF5/Libkleo/DefaultKeyFilter
 /usr/include/KF5/Libkleo/DefaultKeyGenerationJob
 /usr/include/KF5/Libkleo/DirectoryServicesWidget
@@ -162,6 +166,8 @@ popd
 /usr/include/KF5/Libkleo/KeyCache
 /usr/include/KF5/Libkleo/KeyFilter
 /usr/include/KF5/Libkleo/KeyFilterManager
+/usr/include/KF5/Libkleo/KeyGroup
+/usr/include/KF5/Libkleo/KeyList
 /usr/include/KF5/Libkleo/KeyListModel
 /usr/include/KF5/Libkleo/KeyListModelInterface
 /usr/include/KF5/Libkleo/KeyListSortFilterProxyModel
@@ -181,8 +187,10 @@ popd
 /usr/include/KF5/Libkleo/UserIDListModel
 /usr/include/KF5/libkleo/checksumdefinition.h
 /usr/include/KF5/libkleo/classify.h
+/usr/include/KF5/libkleo/compat.h
 /usr/include/KF5/libkleo/cryptoconfigdialog.h
 /usr/include/KF5/libkleo/cryptoconfigmodule.h
+/usr/include/KF5/libkleo/debug.h
 /usr/include/KF5/libkleo/defaultkeyfilter.h
 /usr/include/KF5/libkleo/defaultkeygenerationjob.h
 /usr/include/KF5/libkleo/directoryserviceswidget.h
@@ -199,6 +207,8 @@ popd
 /usr/include/KF5/libkleo/keycache.h
 /usr/include/KF5/libkleo/keyfilter.h
 /usr/include/KF5/libkleo/keyfiltermanager.h
+/usr/include/KF5/libkleo/keygroup.h
+/usr/include/KF5/libkleo/keylist.h
 /usr/include/KF5/libkleo/keylistmodel.h
 /usr/include/KF5/libkleo/keylistmodelinterface.h
 /usr/include/KF5/libkleo/keylistsortfilterproxymodel.h
@@ -228,12 +238,13 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5Libkleo.so.5
-/usr/lib64/libKF5Libkleo.so.5.16.3
+/usr/lib64/libKF5Libkleo.so.5.17.0
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a
 /usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33
+/usr/share/package-licenses/libkleo/8287b608d3fa40ef401339fd907ca1260c964123
 /usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
 %files locales -f libkleopatra.lang
