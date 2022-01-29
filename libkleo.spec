@@ -6,7 +6,7 @@
 #
 Name     : libkleo
 Version  : 21.12.1
-Release  : 38
+Release  : 39
 URL      : https://download.kde.org/stable/release-service/21.12.1/src/libkleo-21.12.1.tar.xz
 Source0  : https://download.kde.org/stable/release-service/21.12.1/src/libkleo-21.12.1.tar.xz
 Source1  : https://download.kde.org/stable/release-service/21.12.1/src/libkleo-21.12.1.tar.xz.sig
@@ -98,7 +98,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641963500
+export SOURCE_DATE_EPOCH=1643437717
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -114,7 +114,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1641963500
+export SOURCE_DATE_EPOCH=1643437717
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
 cp %{_builddir}/libkleo-21.12.1/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/libkleo/29fb05b49e12a380545499938c4879440bd8851e
@@ -147,6 +147,7 @@ popd
 /usr/share/libkleopatra/pics/smartcard.xpm
 /usr/share/qlogging-categories5/libkleo.categories
 /usr/share/qlogging-categories5/libkleo.renamecategories
+/usr/share/xdg/libkleopatrarc
 
 %files dev
 %defattr(-,root,root,-)
