@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : libkleo
-Version  : 21.12.3
-Release  : 43
-URL      : https://download.kde.org/stable/release-service/21.12.3/src/libkleo-21.12.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/21.12.3/src/libkleo-21.12.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/21.12.3/src/libkleo-21.12.3.tar.xz.sig
+Version  : 22.04.0
+Release  : 44
+URL      : https://download.kde.org/stable/release-service/22.04.0/src/libkleo-22.04.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/22.04.0/src/libkleo-22.04.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/22.04.0/src/libkleo-22.04.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : BSD-3-Clause CC0-1.0 GPL-2.0 LGPL-2.0
+License  : BSD-3-Clause CC0-1.0 GPL-2.0 GPL-3.0 LGPL-2.0
 Requires: libkleo-data = %{version}-%{release}
 Requires: libkleo-lib = %{version}-%{release}
 Requires: libkleo-license = %{version}-%{release}
@@ -32,8 +32,7 @@ BuildRequires : ki18n-dev
 BuildRequires : kitemmodels-dev
 BuildRequires : kpimtextedit-dev
 BuildRequires : kwidgetsaddons-dev
-BuildRequires : qtbase-dev
-BuildRequires : qtbase-dev mesa-dev
+Patch1: backport-Include-iterator.patch
 
 %description
 # Fixture for KeyResolverTest
@@ -90,15 +89,16 @@ locales components for the libkleo package.
 
 
 %prep
-%setup -q -n libkleo-21.12.3
-cd %{_builddir}/libkleo-21.12.3
+%setup -q -n libkleo-22.04.0
+cd %{_builddir}/libkleo-22.04.0
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1646543265
+export SOURCE_DATE_EPOCH=1650845687
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -114,15 +114,17 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1646543265
+export SOURCE_DATE_EPOCH=1650845687
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
-cp %{_builddir}/libkleo-21.12.3/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/libkleo/29fb05b49e12a380545499938c4879440bd8851e
-cp %{_builddir}/libkleo-21.12.3/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/libkleo/8287b608d3fa40ef401339fd907ca1260c964123
-cp %{_builddir}/libkleo-21.12.3/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33
-cp %{_builddir}/libkleo-21.12.3/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/libkleo-21.12.3/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a
-cp %{_builddir}/libkleo-21.12.3/metainfo.yaml.license %{buildroot}/usr/share/package-licenses/libkleo/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4
+cp %{_builddir}/libkleo-22.04.0/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/libkleo/29fb05b49e12a380545499938c4879440bd8851e
+cp %{_builddir}/libkleo-22.04.0/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/libkleo/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
+cp %{_builddir}/libkleo-22.04.0/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/libkleo/8287b608d3fa40ef401339fd907ca1260c964123
+cp %{_builddir}/libkleo-22.04.0/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33
+cp %{_builddir}/libkleo-22.04.0/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/libkleo-22.04.0/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/libkleo-22.04.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/libkleo-22.04.0/metainfo.yaml.license %{buildroot}/usr/share/package-licenses/libkleo/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4
 pushd clr-build
 %make_install
 popd
@@ -151,106 +153,122 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/KF5/Libkleo/Algorithm
-/usr/include/KF5/Libkleo/Assuan
-/usr/include/KF5/Libkleo/ChecksumDefinition
-/usr/include/KF5/Libkleo/Classify
-/usr/include/KF5/Libkleo/Compat
-/usr/include/KF5/Libkleo/CryptoConfig
-/usr/include/KF5/Libkleo/CryptoConfigModule
-/usr/include/KF5/Libkleo/DNAttributeOrderConfigWidget
-/usr/include/KF5/Libkleo/Debug
-/usr/include/KF5/Libkleo/DefaultKeyFilter
-/usr/include/KF5/Libkleo/DefaultKeyGenerationJob
-/usr/include/KF5/Libkleo/DirectoryServicesWidget
-/usr/include/KF5/Libkleo/Dn
-/usr/include/KF5/Libkleo/EditDirectoryServiceDialog
-/usr/include/KF5/Libkleo/Enum
-/usr/include/KF5/Libkleo/FileNameRequester
-/usr/include/KF5/Libkleo/FileSystemWatcher
-/usr/include/KF5/Libkleo/Formatting
-/usr/include/KF5/Libkleo/GnuPG
-/usr/include/KF5/Libkleo/KConfigBasedKeyFilter
-/usr/include/KF5/Libkleo/KDHorizontalLine
-/usr/include/KF5/Libkleo/KeyApprovalDialog
-/usr/include/KF5/Libkleo/KeyCache
-/usr/include/KF5/Libkleo/KeyFilter
-/usr/include/KF5/Libkleo/KeyFilterManager
-/usr/include/KF5/Libkleo/KeyGroup
-/usr/include/KF5/Libkleo/KeyList
-/usr/include/KF5/Libkleo/KeyListModel
-/usr/include/KF5/Libkleo/KeyListModelInterface
-/usr/include/KF5/Libkleo/KeyListSortFilterProxyModel
-/usr/include/KF5/Libkleo/KeyRearrangeColumnsProxyModel
-/usr/include/KF5/Libkleo/KeyRequester
-/usr/include/KF5/Libkleo/KeyResolver
-/usr/include/KF5/Libkleo/KeyResolverCore
-/usr/include/KF5/Libkleo/KeySelectionCombo
-/usr/include/KF5/Libkleo/KeySelectionDialog
-/usr/include/KF5/Libkleo/KeyserverConfig
-/usr/include/KF5/Libkleo/KleoException
-/usr/include/KF5/Libkleo/MessageBox
-/usr/include/KF5/Libkleo/NewKeyApprovalDialog
-/usr/include/KF5/Libkleo/OidMap
-/usr/include/KF5/Libkleo/Predicates
-/usr/include/KF5/Libkleo/ProgressDialog
-/usr/include/KF5/Libkleo/SCDaemon
-/usr/include/KF5/Libkleo/Stl_Util
-/usr/include/KF5/Libkleo/StringUtils
-/usr/include/KF5/Libkleo/SubkeyListModel
-/usr/include/KF5/Libkleo/Test
-/usr/include/KF5/Libkleo/UserIDListModel
-/usr/include/KF5/libkleo/algorithm.h
-/usr/include/KF5/libkleo/assuan.h
-/usr/include/KF5/libkleo/checksumdefinition.h
-/usr/include/KF5/libkleo/classify.h
-/usr/include/KF5/libkleo/compat.h
-/usr/include/KF5/libkleo/cryptoconfig.h
-/usr/include/KF5/libkleo/cryptoconfigmodule.h
-/usr/include/KF5/libkleo/debug.h
-/usr/include/KF5/libkleo/defaultkeyfilter.h
-/usr/include/KF5/libkleo/defaultkeygenerationjob.h
-/usr/include/KF5/libkleo/directoryserviceswidget.h
-/usr/include/KF5/libkleo/dn.h
-/usr/include/KF5/libkleo/dnattributeorderconfigwidget.h
-/usr/include/KF5/libkleo/editdirectoryservicedialog.h
-/usr/include/KF5/libkleo/enum.h
-/usr/include/KF5/libkleo/filenamerequester.h
-/usr/include/KF5/libkleo/filesystemwatcher.h
-/usr/include/KF5/libkleo/formatting.h
-/usr/include/KF5/libkleo/gnupg.h
-/usr/include/KF5/libkleo/kconfigbasedkeyfilter.h
-/usr/include/KF5/libkleo/kdhorizontalline.h
-/usr/include/KF5/libkleo/keyapprovaldialog.h
-/usr/include/KF5/libkleo/keycache.h
-/usr/include/KF5/libkleo/keyfilter.h
-/usr/include/KF5/libkleo/keyfiltermanager.h
-/usr/include/KF5/libkleo/keygroup.h
-/usr/include/KF5/libkleo/keylist.h
-/usr/include/KF5/libkleo/keylistmodel.h
-/usr/include/KF5/libkleo/keylistmodelinterface.h
-/usr/include/KF5/libkleo/keylistsortfilterproxymodel.h
-/usr/include/KF5/libkleo/keyrearrangecolumnsproxymodel.h
-/usr/include/KF5/libkleo/keyrequester.h
-/usr/include/KF5/libkleo/keyresolver.h
-/usr/include/KF5/libkleo/keyresolvercore.h
-/usr/include/KF5/libkleo/keyselectioncombo.h
-/usr/include/KF5/libkleo/keyselectiondialog.h
-/usr/include/KF5/libkleo/keyserverconfig.h
-/usr/include/KF5/libkleo/kleo_export.h
-/usr/include/KF5/libkleo/kleoexception.h
-/usr/include/KF5/libkleo/messagebox.h
-/usr/include/KF5/libkleo/newkeyapprovaldialog.h
-/usr/include/KF5/libkleo/oidmap.h
-/usr/include/KF5/libkleo/predicates.h
-/usr/include/KF5/libkleo/progressdialog.h
-/usr/include/KF5/libkleo/scdaemon.h
-/usr/include/KF5/libkleo/stl_util.h
-/usr/include/KF5/libkleo/stringutils.h
-/usr/include/KF5/libkleo/subkeylistmodel.h
-/usr/include/KF5/libkleo/test.h
-/usr/include/KF5/libkleo/useridlistmodel.h
-/usr/include/KF5/libkleo_version.h
+/usr/include/KF5/Libkleo/Libkleo/Algorithm
+/usr/include/KF5/Libkleo/Libkleo/Assuan
+/usr/include/KF5/Libkleo/Libkleo/ChecksumDefinition
+/usr/include/KF5/Libkleo/Libkleo/Classify
+/usr/include/KF5/Libkleo/Libkleo/Compat
+/usr/include/KF5/Libkleo/Libkleo/CryptoConfig
+/usr/include/KF5/Libkleo/Libkleo/CryptoConfigModule
+/usr/include/KF5/Libkleo/Libkleo/DNAttributeOrderConfigWidget
+/usr/include/KF5/Libkleo/Libkleo/Debug
+/usr/include/KF5/Libkleo/Libkleo/DefaultKeyFilter
+/usr/include/KF5/Libkleo/Libkleo/DefaultKeyGenerationJob
+/usr/include/KF5/Libkleo/Libkleo/DirectoryServicesWidget
+/usr/include/KF5/Libkleo/Libkleo/Dn
+/usr/include/KF5/Libkleo/Libkleo/DocAction
+/usr/include/KF5/Libkleo/Libkleo/EditDirectoryServiceDialog
+/usr/include/KF5/Libkleo/Libkleo/Enum
+/usr/include/KF5/Libkleo/Libkleo/FileNameRequester
+/usr/include/KF5/Libkleo/Libkleo/FileSystemWatcher
+/usr/include/KF5/Libkleo/Libkleo/Formatting
+/usr/include/KF5/Libkleo/Libkleo/GnuPG
+/usr/include/KF5/Libkleo/Libkleo/Hex
+/usr/include/KF5/Libkleo/Libkleo/KConfigBasedKeyFilter
+/usr/include/KF5/Libkleo/Libkleo/KDHorizontalLine
+/usr/include/KF5/Libkleo/Libkleo/KeyApprovalDialog
+/usr/include/KF5/Libkleo/Libkleo/KeyCache
+/usr/include/KF5/Libkleo/Libkleo/KeyFilter
+/usr/include/KF5/Libkleo/Libkleo/KeyFilterManager
+/usr/include/KF5/Libkleo/Libkleo/KeyGroup
+/usr/include/KF5/Libkleo/Libkleo/KeyGroupConfig
+/usr/include/KF5/Libkleo/Libkleo/KeyGroupImportExport
+/usr/include/KF5/Libkleo/Libkleo/KeyHelpers
+/usr/include/KF5/Libkleo/Libkleo/KeyList
+/usr/include/KF5/Libkleo/Libkleo/KeyListModel
+/usr/include/KF5/Libkleo/Libkleo/KeyListModelInterface
+/usr/include/KF5/Libkleo/Libkleo/KeyListSortFilterProxyModel
+/usr/include/KF5/Libkleo/Libkleo/KeyRearrangeColumnsProxyModel
+/usr/include/KF5/Libkleo/Libkleo/KeyRequester
+/usr/include/KF5/Libkleo/Libkleo/KeyResolver
+/usr/include/KF5/Libkleo/Libkleo/KeyResolverCore
+/usr/include/KF5/Libkleo/Libkleo/KeySelectionCombo
+/usr/include/KF5/Libkleo/Libkleo/KeySelectionDialog
+/usr/include/KF5/Libkleo/Libkleo/KeyserverConfig
+/usr/include/KF5/Libkleo/Libkleo/KleoException
+/usr/include/KF5/Libkleo/Libkleo/MessageBox
+/usr/include/KF5/Libkleo/Libkleo/NewKeyApprovalDialog
+/usr/include/KF5/Libkleo/Libkleo/OidMap
+/usr/include/KF5/Libkleo/Libkleo/Predicates
+/usr/include/KF5/Libkleo/Libkleo/ProgressDialog
+/usr/include/KF5/Libkleo/Libkleo/QtStlHelpers
+/usr/include/KF5/Libkleo/Libkleo/ReaderPortSelection
+/usr/include/KF5/Libkleo/Libkleo/SCDaemon
+/usr/include/KF5/Libkleo/Libkleo/Stl_Util
+/usr/include/KF5/Libkleo/Libkleo/StringUtils
+/usr/include/KF5/Libkleo/Libkleo/SubkeyListModel
+/usr/include/KF5/Libkleo/Libkleo/Test
+/usr/include/KF5/Libkleo/Libkleo/UniqueLock
+/usr/include/KF5/Libkleo/Libkleo/UserIDListModel
+/usr/include/KF5/Libkleo/libkleo/algorithm.h
+/usr/include/KF5/Libkleo/libkleo/assuan.h
+/usr/include/KF5/Libkleo/libkleo/checksumdefinition.h
+/usr/include/KF5/Libkleo/libkleo/classify.h
+/usr/include/KF5/Libkleo/libkleo/compat.h
+/usr/include/KF5/Libkleo/libkleo/cryptoconfig.h
+/usr/include/KF5/Libkleo/libkleo/cryptoconfigmodule.h
+/usr/include/KF5/Libkleo/libkleo/debug.h
+/usr/include/KF5/Libkleo/libkleo/defaultkeyfilter.h
+/usr/include/KF5/Libkleo/libkleo/defaultkeygenerationjob.h
+/usr/include/KF5/Libkleo/libkleo/directoryserviceswidget.h
+/usr/include/KF5/Libkleo/libkleo/dn.h
+/usr/include/KF5/Libkleo/libkleo/dnattributeorderconfigwidget.h
+/usr/include/KF5/Libkleo/libkleo/docaction.h
+/usr/include/KF5/Libkleo/libkleo/editdirectoryservicedialog.h
+/usr/include/KF5/Libkleo/libkleo/enum.h
+/usr/include/KF5/Libkleo/libkleo/filenamerequester.h
+/usr/include/KF5/Libkleo/libkleo/filesystemwatcher.h
+/usr/include/KF5/Libkleo/libkleo/formatting.h
+/usr/include/KF5/Libkleo/libkleo/gnupg.h
+/usr/include/KF5/Libkleo/libkleo/hex.h
+/usr/include/KF5/Libkleo/libkleo/kconfigbasedkeyfilter.h
+/usr/include/KF5/Libkleo/libkleo/kdhorizontalline.h
+/usr/include/KF5/Libkleo/libkleo/keyapprovaldialog.h
+/usr/include/KF5/Libkleo/libkleo/keycache.h
+/usr/include/KF5/Libkleo/libkleo/keyfilter.h
+/usr/include/KF5/Libkleo/libkleo/keyfiltermanager.h
+/usr/include/KF5/Libkleo/libkleo/keygroup.h
+/usr/include/KF5/Libkleo/libkleo/keygroupconfig.h
+/usr/include/KF5/Libkleo/libkleo/keygroupimportexport.h
+/usr/include/KF5/Libkleo/libkleo/keyhelpers.h
+/usr/include/KF5/Libkleo/libkleo/keylist.h
+/usr/include/KF5/Libkleo/libkleo/keylistmodel.h
+/usr/include/KF5/Libkleo/libkleo/keylistmodelinterface.h
+/usr/include/KF5/Libkleo/libkleo/keylistsortfilterproxymodel.h
+/usr/include/KF5/Libkleo/libkleo/keyrearrangecolumnsproxymodel.h
+/usr/include/KF5/Libkleo/libkleo/keyrequester.h
+/usr/include/KF5/Libkleo/libkleo/keyresolver.h
+/usr/include/KF5/Libkleo/libkleo/keyresolvercore.h
+/usr/include/KF5/Libkleo/libkleo/keyselectioncombo.h
+/usr/include/KF5/Libkleo/libkleo/keyselectiondialog.h
+/usr/include/KF5/Libkleo/libkleo/keyserverconfig.h
+/usr/include/KF5/Libkleo/libkleo/kleo_export.h
+/usr/include/KF5/Libkleo/libkleo/kleoexception.h
+/usr/include/KF5/Libkleo/libkleo/messagebox.h
+/usr/include/KF5/Libkleo/libkleo/newkeyapprovaldialog.h
+/usr/include/KF5/Libkleo/libkleo/oidmap.h
+/usr/include/KF5/Libkleo/libkleo/predicates.h
+/usr/include/KF5/Libkleo/libkleo/progressdialog.h
+/usr/include/KF5/Libkleo/libkleo/qtstlhelpers.h
+/usr/include/KF5/Libkleo/libkleo/readerportselection.h
+/usr/include/KF5/Libkleo/libkleo/scdaemon.h
+/usr/include/KF5/Libkleo/libkleo/stl_util.h
+/usr/include/KF5/Libkleo/libkleo/stringutils.h
+/usr/include/KF5/Libkleo/libkleo/subkeylistmodel.h
+/usr/include/KF5/Libkleo/libkleo/test.h
+/usr/include/KF5/Libkleo/libkleo/uniquelock.h
+/usr/include/KF5/Libkleo/libkleo/useridlistmodel.h
+/usr/include/KF5/Libkleo/libkleo_version.h
 /usr/lib64/cmake/KF5Libkleo/KF5LibkleoConfig.cmake
 /usr/lib64/cmake/KF5Libkleo/KF5LibkleoConfigVersion.cmake
 /usr/lib64/cmake/KF5Libkleo/KF5LibkleoTargets-relwithdebinfo.cmake
@@ -261,15 +279,17 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5Libkleo.so.5
-/usr/lib64/libKF5Libkleo.so.5.19.3
+/usr/lib64/libKF5Libkleo.so.5.20.0
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a
 /usr/share/package-licenses/libkleo/29fb05b49e12a380545499938c4879440bd8851e
 /usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33
+/usr/share/package-licenses/libkleo/31a3d460bb3c7d98845187c716a30db81c44b615
 /usr/share/package-licenses/libkleo/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4
 /usr/share/package-licenses/libkleo/8287b608d3fa40ef401339fd907ca1260c964123
+/usr/share/package-licenses/libkleo/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
 /usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
 %files locales -f libkleopatra.lang
