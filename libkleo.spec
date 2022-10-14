@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : libkleo
-Version  : 22.08.1
-Release  : 49
-URL      : https://download.kde.org/stable/release-service/22.08.1/src/libkleo-22.08.1.tar.xz
-Source0  : https://download.kde.org/stable/release-service/22.08.1/src/libkleo-22.08.1.tar.xz
-Source1  : https://download.kde.org/stable/release-service/22.08.1/src/libkleo-22.08.1.tar.xz.sig
+Version  : 22.08.2
+Release  : 50
+URL      : https://download.kde.org/stable/release-service/22.08.2/src/libkleo-22.08.2.tar.xz
+Source0  : https://download.kde.org/stable/release-service/22.08.2/src/libkleo-22.08.2.tar.xz
+Source1  : https://download.kde.org/stable/release-service/22.08.2/src/libkleo-22.08.2.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GPL-2.0 GPL-3.0 LGPL-2.0
@@ -90,15 +90,15 @@ locales components for the libkleo package.
 
 
 %prep
-%setup -q -n libkleo-22.08.1
-cd %{_builddir}/libkleo-22.08.1
+%setup -q -n libkleo-22.08.2
+cd %{_builddir}/libkleo-22.08.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1662781777
+export SOURCE_DATE_EPOCH=1665764484
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -114,17 +114,17 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1662781777
+export SOURCE_DATE_EPOCH=1665764484
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
-cp %{_builddir}/libkleo-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/libkleo/29fb05b49e12a380545499938c4879440bd8851e
-cp %{_builddir}/libkleo-%{version}/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/libkleo/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
-cp %{_builddir}/libkleo-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/libkleo/8287b608d3fa40ef401339fd907ca1260c964123
-cp %{_builddir}/libkleo-%{version}/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33
-cp %{_builddir}/libkleo-%{version}/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/libkleo-%{version}/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/31a3d460bb3c7d98845187c716a30db81c44b615
-cp %{_builddir}/libkleo-%{version}/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a
-cp %{_builddir}/libkleo-%{version}/metainfo.yaml.license %{buildroot}/usr/share/package-licenses/libkleo/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4
+cp %{_builddir}/libkleo-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/libkleo/29fb05b49e12a380545499938c4879440bd8851e || :
+cp %{_builddir}/libkleo-%{version}/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/libkleo/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c || :
+cp %{_builddir}/libkleo-%{version}/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/libkleo/8287b608d3fa40ef401339fd907ca1260c964123 || :
+cp %{_builddir}/libkleo-%{version}/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/libkleo/2a638514c87c4923c0570c55822620fad56f2a33 || :
+cp %{_builddir}/libkleo-%{version}/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/e712eadfab0d2357c0f50f599ef35ee0d87534cb || :
+cp %{_builddir}/libkleo-%{version}/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/31a3d460bb3c7d98845187c716a30db81c44b615 || :
+cp %{_builddir}/libkleo-%{version}/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/libkleo/20079e8f79713dce80ab09774505773c926afa2a || :
+cp %{_builddir}/libkleo-%{version}/metainfo.yaml.license %{buildroot}/usr/share/package-licenses/libkleo/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4 || :
 pushd clr-build
 %make_install
 popd
@@ -281,7 +281,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5Libkleo.so.5
-/usr/lib64/libKF5Libkleo.so.5.21.1
+/usr/lib64/libKF5Libkleo.so.5.21.2
 
 %files license
 %defattr(0644,root,root,0755)
