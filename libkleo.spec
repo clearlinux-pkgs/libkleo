@@ -7,7 +7,7 @@
 #
 Name     : libkleo
 Version  : 23.04.1
-Release  : 58
+Release  : 59
 URL      : https://download.kde.org/stable/release-service/23.04.1/src/libkleo-23.04.1.tar.xz
 Source0  : https://download.kde.org/stable/release-service/23.04.1/src/libkleo-23.04.1.tar.xz
 Source1  : https://download.kde.org/stable/release-service/23.04.1/src/libkleo-23.04.1.tar.xz.sig
@@ -94,7 +94,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684810335
+export SOURCE_DATE_EPOCH=1685641791
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -127,7 +127,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1684810335
+export SOURCE_DATE_EPOCH=1685641791
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
 cp %{_builddir}/libkleo-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/libkleo/29fb05b49e12a380545499938c4879440bd8851e || :
@@ -170,7 +170,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libKPim5Libkleo.so
 /usr/include/KPim5/Libkleo/Libkleo/Algorithm
 /usr/include/KPim5/Libkleo/Libkleo/Assuan
 /usr/include/KPim5/Libkleo/Libkleo/AuditLogEntry
@@ -312,7 +311,6 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libKPim5Libkleo.so.5
 /V3/usr/lib64/libKPim5Libkleo.so.5.23.1
 /usr/lib64/libKPim5Libkleo.so.5
 /usr/lib64/libKPim5Libkleo.so.5.23.1
