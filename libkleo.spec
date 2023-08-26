@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : libkleo
-Version  : 23.04.3
-Release  : 61
-URL      : https://download.kde.org/stable/release-service/23.04.3/src/libkleo-23.04.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/23.04.3/src/libkleo-23.04.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/23.04.3/src/libkleo-23.04.3.tar.xz.sig
+Version  : 23.08.0
+Release  : 62
+URL      : https://download.kde.org/stable/release-service/23.08.0/src/libkleo-23.08.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/23.08.0/src/libkleo-23.08.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/23.08.0/src/libkleo-23.08.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GPL-2.0 GPL-3.0 LGPL-2.0
@@ -86,15 +86,15 @@ locales components for the libkleo package.
 
 
 %prep
-%setup -q -n libkleo-23.04.3
-cd %{_builddir}/libkleo-23.04.3
+%setup -q -n libkleo-23.08.0
+cd %{_builddir}/libkleo-23.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1688868657
+export SOURCE_DATE_EPOCH=1693063415
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -127,7 +127,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1688868657
+export SOURCE_DATE_EPOCH=1693063415
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libkleo
 cp %{_builddir}/libkleo-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/libkleo/29fb05b49e12a380545499938c4879440bd8851e || :
@@ -175,6 +175,7 @@ popd
 /usr/include/KPim5/Libkleo/Libkleo/AuditLogEntry
 /usr/include/KPim5/Libkleo/Libkleo/AuditLogViewer
 /usr/include/KPim5/Libkleo/Libkleo/ChecksumDefinition
+/usr/include/KPim5/Libkleo/Libkleo/Chrono
 /usr/include/KPim5/Libkleo/Libkleo/Classify
 /usr/include/KPim5/Libkleo/Libkleo/Compat
 /usr/include/KPim5/Libkleo/Libkleo/Compliance
@@ -189,6 +190,9 @@ popd
 /usr/include/KPim5/Libkleo/Libkleo/DocAction
 /usr/include/KPim5/Libkleo/Libkleo/EditDirectoryServiceDialog
 /usr/include/KPim5/Libkleo/Libkleo/Enum
+/usr/include/KPim5/Libkleo/Libkleo/ExpiryChecker
+/usr/include/KPim5/Libkleo/Libkleo/ExpiryCheckerConfig
+/usr/include/KPim5/Libkleo/Libkleo/ExpiryCheckerSettings
 /usr/include/KPim5/Libkleo/Libkleo/FileNameRequester
 /usr/include/KPim5/Libkleo/Libkleo/FileSystemWatcher
 /usr/include/KPim5/Libkleo/Libkleo/Formatting
@@ -238,6 +242,7 @@ popd
 /usr/include/KPim5/Libkleo/libkleo/auditlogentry.h
 /usr/include/KPim5/Libkleo/libkleo/auditlogviewer.h
 /usr/include/KPim5/Libkleo/libkleo/checksumdefinition.h
+/usr/include/KPim5/Libkleo/libkleo/chrono.h
 /usr/include/KPim5/Libkleo/libkleo/classify.h
 /usr/include/KPim5/Libkleo/libkleo/compat.h
 /usr/include/KPim5/Libkleo/libkleo/compliance.h
@@ -252,6 +257,10 @@ popd
 /usr/include/KPim5/Libkleo/libkleo/docaction.h
 /usr/include/KPim5/Libkleo/libkleo/editdirectoryservicedialog.h
 /usr/include/KPim5/Libkleo/libkleo/enum.h
+/usr/include/KPim5/Libkleo/libkleo/expirychecker.h
+/usr/include/KPim5/Libkleo/libkleo/expirycheckerconfig.h
+/usr/include/KPim5/Libkleo/libkleo/expirycheckerconfigbase.h
+/usr/include/KPim5/Libkleo/libkleo/expirycheckersettings.h
 /usr/include/KPim5/Libkleo/libkleo/filenamerequester.h
 /usr/include/KPim5/Libkleo/libkleo/filesystemwatcher.h
 /usr/include/KPim5/Libkleo/libkleo/formatting.h
@@ -311,9 +320,9 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libKPim5Libkleo.so.5.23.3
+/V3/usr/lib64/libKPim5Libkleo.so.5.24.0
 /usr/lib64/libKPim5Libkleo.so.5
-/usr/lib64/libKPim5Libkleo.so.5.23.3
+/usr/lib64/libKPim5Libkleo.so.5.24.0
 
 %files license
 %defattr(0644,root,root,0755)
